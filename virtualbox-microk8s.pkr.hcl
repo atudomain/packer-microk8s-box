@@ -1,11 +1,14 @@
 
-source "vagrant" "focal64" {
+source "vagrant" "ubuntu" {
   communicator = "ssh"
-  source_path  = "ubuntu/focal64"
+  source_path  = "bento/ubuntu-20.04"
   provider     = "virtualbox"
   add_force    = true
 }
 
 build {
-  sources = ["source.vagrant.focal64"]
+  sources = ["source.vagrant.ubuntu"]
+  provisioner "shell" {
+    script = "./install-microk8s.sh"
+  }
 }
